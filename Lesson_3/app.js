@@ -164,12 +164,15 @@ function makeSquare(number) {
 }
 
 var sumEvens = numbers
-  .map(makeSquare)
+  .map(function (number) {
+    return number ** 2;
+  })
   .filter(function (number) {
     return number % 2 === 0;
   })
   .reduce(function (result, number) {
     result += number;
     return result;
-  }, 0);
+  },0);
 console.log(sumEvens);
+
