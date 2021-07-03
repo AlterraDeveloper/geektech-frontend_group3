@@ -1,8 +1,7 @@
 // import Task from "./Task";
-// import ShopItem from "./Models/ShopItem";
-// import Laptop from "./Models/Laptop";
-// import Smartphone from "./Models/Smartphone";
+import ShopItem from "./Models/ShopItem";
 import Laptop from "./Models/Laptop";
+import Smartphone from "./Models/Smartphone";
 // const userName = "Ivan";
 // const userSurname = "Ivanov";
 // const contactPhone = "+996999111222";
@@ -30,8 +29,12 @@ import Laptop from "./Models/Laptop";
 
 // console.log(task);
 
+const si = new ShopItem(500);
+console.log(si);
 const laptop = new Laptop("DELL", "Vostro", 1000);
-// const phone = new Smartphone("Samsung", "A7", 1000, "Android");
+console.log(laptop.price);
+const phone = new Smartphone("Android", 1500);
+console.log(phone.price);
 
 // console.log(laptop.getPrice());
 // console.log(phone.getPrice());

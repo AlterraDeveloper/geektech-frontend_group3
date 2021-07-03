@@ -1,20 +1,17 @@
-import Laptop from "./Laptop";
-import Smartphone from "./Smartphone";
-
 export default class ShopItem {
-  constructor(vendor, model, price) {
-    this.model = model;
-    this.vendor = vendor;
-    this.price = price;
+  #price;
+
+  constructor(price) {
+      this.#price = price;
+      console.log("Build ShopItem object");
   }
 
-  //   getPrice() {
-  //     if (this instanceof Laptop) {
-  //       return this.price - this.price * 0.05;
-  //     }
-  //     if (this instanceof Smartphone) {
-  //       return this.price - this.price * 0.25;
-  //     }
-  //     return this.price;
-  //   }
+  get price() {
+    return this.#price;
+  }
+
+  set price(value) {
+    if (value < 0) throw new RangeError("Цена должна быть больше нуля");
+    this.#price = value;
+  }
 }
