@@ -1,10 +1,10 @@
 // import Animal from "./FuncModels/Animal";
 // import Lion from "./FuncModels/Lion";
-import Animal from "./Models/Animal";
-import { Cat, Dog } from "./Models/Cat";
-import Client from "./Models/Client";
-import Lion from "./Models/Lion";
-import Pet from "./Models/Pet";
+// import Animal from "./Models/Animal";
+// import { Cat, Dog } from "./Models/Cat";
+// import Client from "./Models/Client";
+// import Lion from "./Models/Lion";
+// import Pet from "./Models/Pet";
 
 // const animal = new Animal();
 // console.log(animal);
@@ -18,15 +18,15 @@ import Pet from "./Models/Pet";
 // console.log(pet);
 // pet.makeVoice();
 
-const cat = new Cat("Ryzhik");
-try {
-  cat.name = "";
-} catch (error) {
-  console.warn("Cat error:", error);
-} finally {
-  cat.name = "...";
-}
-console.log("Cat's name:", cat.name);
+// const cat = new Cat("Ryzhik");
+// try {
+//   cat.name = "";
+// } catch (error) {
+//   console.warn("Cat error:", error);
+// } finally {
+//   cat.name = "...";
+// }
+// console.log("Cat's name:", cat.name);
 // cat.makeVoice();
 
 // const dog = new Dog("Sharik", "Ivan", "spaniel");
@@ -65,15 +65,39 @@ console.log("Cat's name:", cat.name);
 // console.log(animals.first());
 // console.log(animals.last());
 
-const client = new Client("Ivanov", "Ivan", "Ivanovich");
-console.log(client.fullname);
+// const client = new Client("Ivanov", "Ivan", "Ivanovich");
+// console.log(client.fullname);
 
-const list = document.getElementById("list");
-Array.from(list.children).forEach((child, index) => (child.innerText = index + 1));
+// const list = document.getElementById("list");
+// Array.from(list.children).forEach((child, index) => (child.innerText = index + 1));
 
-Lion.Roar()
+// Lion.Roar()
 
-let number = "5"
-console.log(typeof number);
-number = Number.parseInt(number)
-console.log(typeof number);
+// let number = "5"
+// console.log(typeof number);
+// number = Number.parseInt(number)
+// console.log(typeof number);
+
+const Animal = function () {};
+
+Animal.prototype.makeVoice = function () {
+  console.log("This animal make voice");
+};
+
+const Lion = function (prideCount) {
+  Animal.apply(this, arguments);
+  this.prideCount = 12;
+  //   this.makeVoice = function () {
+  //     console.log("Lion says raaarrrrr");
+  //   };
+};
+
+Lion.prototype.constructor = Lion;
+Lion.prototype = Object.create(Animal);
+Lion.prototype.makeVoice = function () {
+  Animal.prototype.makeVoice();
+  console.log("Lion says raaarrrrr");
+};
+
+new Animal().makeVoice();
+new Lion(15).makeVoice();
