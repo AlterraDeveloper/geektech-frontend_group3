@@ -2,53 +2,59 @@
 
 // throw new Error("Ошибка просто так)))");
 
-// class PersonAgeError extends Error {
-//   constructor() {
-//     super("Возраст задается целым положительным числом");
-//   }
-// }
+class PersonAgeError extends Error {
+  constructor() {
+    super("Возраст задается целым положительным числом");
+  }
+}
 
-// class Person {
-//   constructor(name, surname) {
-//     this.name = name;
-//     this.surname = surname;
-//   }
+class Person {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
 
-//   #age;
+  #age;
 
-//   get age() {
-//     return this.#age;
-//   }
+  get age() {
+    return this.#age;
+  }
 
-//   set age(value) {
-//     if (typeof value !== "number") throw new PersonAgeError();
-//     if (value < 0 || value > 100) throw new RangeError();
-//     this.#age = value;
-//   }
-// }
+  set age(value) {
+    if (typeof value !== "number") throw new PersonAgeError();
+    if (value < 0 || value > 100) throw new RangeError();
+    this.#age = value;
+  }
+}
 
-// let person = new Person("Ivan", "Ivanov");
+let person = new Person("Ivan", "Ivanov");
 
-// try {
-//   var obj = {};
-//   obj.innerObj.make();
-//   person.age = -5;
-//   person.age = "пять лет";
-// } catch (personAgeError) {
-//   const errorType = personAgeError.constructor.name;
-//   console.log(personAgeError);
-//   switch (errorType) {
-//     case "TypeError":
-//       console.warn("Возраст задается целым положительным числом");
-//       break;
-//     case "RangeError":
-//       console.warn("Возраст должен быть больше нуля и меньше ста");
-//       break;
-//     default:
-//       console.warn("Неизвестная ошибка");
-//       break;
-//   }
-// }
+try {
+  var obj = {};
+  obj.innerObj.make();
+  // person.age = -5;
+  // person.age = "пять лет";
+} catch (personAgeError) {
+  console.log(personAgeError);
+  if (personAgeError instanceof PersonAgeError) {
+    console.warn("Возраст задается целым положительным числом");
+  } else if (personAgeError instanceof RangeError) {
+    console.warn("Возраст должен быть больше нуля и меньше ста");
+  } else {
+    console.warn("Неизвестная ошибка");
+  }
+  // switch (errorType) {
+  //   case "TypeError":
+  //     console.warn("Возраст задается целым положительным числом");
+  //     break;
+  //   case "RangeError":
+  //     console.warn("Возраст должен быть больше нуля и меньше ста");
+  //     break;
+  //   default:
+  //     console.warn("Неизвестная ошибка");
+  //     break;
+  // }
+}
 
 // function Nuller() {
 //   for (const key in this) {
@@ -96,57 +102,55 @@
 
 //Регулярные выражения - Regular expressions
 
-const kgPhoneInput = document.getElementById("kgPhoneInput");
-const kgPhoneValidationText = document.getElementById("kgPhoneValidationText");
-const checkBtn = document.getElementById("checkBtn");
+// const kgPhoneInput = document.getElementById("kgPhoneInput");
+// const kgPhoneValidationText = document.getElementById("kgPhoneValidationText");
+// const checkBtn = document.getElementById("checkBtn");
 
-function Validator(validationBlock, validationCallBack) {
-  const validationBlockName = validationBlock.dataset.name;
-  const input = validationBlock.querySelector(`#${validationBlockName}Input`);
-  const validationText = validationBlock.querySelector(
-    `#${validationBlockName}ValidationText`
-  );
-  validationText.classList = [];
-  if (validationCallBack(input.value)) {
-    validationText.innerText = "ok";
-    validationText.classList.add("ok");
-  } else {
-    validationText.innerText = "validation error";
-    validationText.classList.add("error");
-  }
-}
+// function Validator(validationBlock, validationCallBack) {
+//   const validationBlockName = validationBlock.dataset.name;
+//   const input = validationBlock.querySelector(`#${validationBlockName}Input`);
+//   const validationText = validationBlock.querySelector(
+//     `#${validationBlockName}ValidationText`
+//   );
+//   validationText.classList = [];
+//   if (validationCallBack(input.value)) {
+//     validationText.innerText = "ok";
+//     validationText.classList.add("ok");
+//   } else {
+//     validationText.innerText = "validation error";
+//     validationText.classList.add("error");
+//   }
+// }
 
-function validateKgPhone(phone) {
-  // +996 xxx xx-xx-xx
-  return /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/.test(phone);
-}
+// function validateKgPhone(phone) {
+//   // +996 xxx xx-xx-xx
+//   return /^\+996 \d{3} \d{2}-\d{2}-\d{2}$/.test(phone);
+// }
 
-function validateSalary(salary) {
-  //1000 c или 1000 $
-  return /^\d+ [$c]{1}$/.test(salary);
-}
+// function validateSalary(salary) {
+//   //1000 c или 1000 $
+//   return /^\d+ [$c]{1}$/.test(salary);
+// }
 
-checkBtn.addEventListener("click", () => {
-  const validationBlocks = document.querySelectorAll(".value");
-  [...validationBlocks].forEach((block) => {
-    let validationFn;
-    switch (block.dataset.name) {
-      case "kgPhone":
-        validationFn = validateKgPhone;
-        break;
-      case "salary":
-        validationFn = validateSalary;
-        break;
-      default:
-        validationFn = () => true;
-        break;
-    }
-    Validator(block, validationFn);
-  });
-  //   setTimeout(() => {
-  //     kgPhoneValidationText.classList = "";
-  //     kgPhoneValidationText.innerText = "";
-  //   }, 4000);
-});
-
-// 556555666;
+// checkBtn.addEventListener("click", () => {
+//   const validationBlocks = document.querySelectorAll(".value");
+//   [...validationBlocks].forEach((block) => {
+//     let validationFn;
+//     switch (block.dataset.name) {
+//       case "kgPhone":
+//         validationFn = validateKgPhone;
+//         break;
+//       case "salary":
+//         validationFn = validateSalary;
+//         break;
+//       default:
+//         validationFn = () => true;
+//         break;
+//     }
+//     Validator(block, validationFn);
+//   });
+//   //   setTimeout(() => {
+//   //     kgPhoneValidationText.classList = "";
+//   //     kgPhoneValidationText.innerText = "";
+//   //   }, 4000);
+// });
